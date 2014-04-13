@@ -27,10 +27,9 @@ public class HelloServer{
 
   public static void main(String args[]){
     try{
-      // create and initialize the ORB
       // ORB를 생성하고
       // 리퀘스트를 처리하는 데 활용할 rootpoa에 대한 참조를 얻고, POAManager를 활성화시킨다.
-      // ( POA는 객체에 대한 참조를 사용하는 리퀘스트와, 그 리퀘스트에 대한 알맞은 서비스를 제공할 코드를 연결하는 방법을 제공한다 )
+      // ( POA는 객체에 대한 참조를 사용하는 리퀘스트와, 그 리퀘스트에 대한 알맞은 서비스를 연결하는 방법을 제공한다 )
       ORB orb = ORB.init(args, null);
       POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
       rootpoa.the_POAManager().activate();
@@ -43,7 +42,7 @@ public class HelloServer{
 
       // HelloPOATie 객체의 인스턴스인 tie를 생성하는데
       // 앞에서 생성한 helloImpl과 rootpoa를 생성자에 전달한다.
-      // 그러면 tie는 HelloOperations 인터페이스와 POA를 가지고 있게 된다.
+      // 그러면 tie는 ORB와 POA를 가지고 있게 된다.
       HelloPOATie tie = new HelloPOATie(helloImpl, rootpoa);
 
       // tie의 _this메서드를 실행하면 HelloHelper의 narrow 메서드가 호출된다.
